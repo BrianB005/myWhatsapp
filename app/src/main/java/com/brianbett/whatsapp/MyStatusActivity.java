@@ -44,30 +44,16 @@ public class MyStatusActivity extends AppCompatActivity implements StoriesProgre
 
 
 
-    // on below line we are creating a int array
-    // in which we are storing all our image ids.
-    private final int[] resources = new int[]{
-            R.drawable.image4,
-            R.drawable.image5,
-            R.drawable.image6,
-            R.drawable.image7,
-            R.drawable.image2,
-            R.drawable.image3,
+    
 
-    };
-
-    // on below line we are creating variable for
-    // our press time and time limit to display a story.
+    
     long pressTime = 0L;
     long limit = 500L;
 
-    // on below line we are creating variables for
-    // our progress bar view and image view .
     private StoriesProgressView storiesProgressView;
     private ImageView image;
 
-    // on below line we are creating a counter
-    // for keeping count of our stories.
+    
     private int counter = 0;
 
     // on below line we are creating a new method for adding touch listener
@@ -75,28 +61,24 @@ public class MyStatusActivity extends AppCompatActivity implements StoriesProgre
         @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            // inside on touch method we are
-            // getting action on below line.
+            
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
 
-                    // on action down when we press our screen
-                    // the story will pause for specific time.
                     pressTime = System.currentTimeMillis();
 
-                    // on below line we are pausing our indicator.
+                    
                     storiesProgressView.pause();
                     return false;
                 case MotionEvent.ACTION_UP:
 
-                    // in action up case when user do not touches
-                    // screen this method will skip to next image.
+                 
                     long now = System.currentTimeMillis();
 
-                    // on below line we are resuming our progress bar for status.
+                 
                     storiesProgressView.resume();
 
-                    // on below line we are returning if the limit < now - presstime
+                    
                     return limit < now - pressTime;
             }
             return false;
@@ -194,15 +176,14 @@ public class MyStatusActivity extends AppCompatActivity implements StoriesProgre
 
     @Override
     public void onNext() {
-        image.setImageResource(resources[++counter]);
+        handleStatus(MyStatusActivity.statuses.get(++counter), MyStatusActivity.this, image, statusCaption, typedStatus, actionBar);
     }
 
     @Override
     public void onPrev() {
         if ((counter - 1) < 0) return;
-
-        // on below line we are setting image to image view
-        image.setImageResource(resources[--counter]);
+        handleStatus(MyStatusActivity.statuses.get(--counter), MyStatusActivity.this, image, statusCaption, typedStatus, actionBar);
+        
     }
 
     @Override
