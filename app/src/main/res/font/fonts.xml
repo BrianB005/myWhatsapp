@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:app="http://schemas.app.com/apk/res/app">
+    <font app:fontStyle="normal" app:font="@font/anton" app:fontWeight="400"/>
+    <font app:fontStyle="italic" app:font="@font/anton" app:fontWeight="300"/>
+    <font app:fontStyle="normal" app:font="@font/baumans" app:fontWeight="500"/>
+    <font app:fontStyle="italic" app:font="@font/baumans" app:fontWeight="300"/>
+    <font app:fontStyle="normal" app:font="@font/chicle" app:fontWeight="400"/>
+    <font app:fontStyle="italic" app:font="@font/chicle" app:fontWeight="300"/>
+    <font app:fontStyle="normal" app:font="@font/droid_sans_bold" app:fontWeight="400"/>
+    <font app:fontStyle="italic" app:font="@font/droid_sans_bold" app:fontWeight="300"/>
+    <font app:fontStyle="normal" app:font="@font/duru_sans" app:fontWeight="400"/>
+    <font app:fontStyle="italic" app:font="@font/duru_sans" app:fontWeight="300"/>
+    <font app:fontStyle="normal" app:font="@font/gudea_italic" app:fontWeight="800"/>
+    <font app:fontStyle="italic" app:font="@font/gudea_italic" app:fontWeight="300"/>
+    <font app:fontStyle="normal" app:font="@font/elsie" app:fontWeight="400"/>
+    <font app:fontStyle="italic" app:font="@font/elsie" app:fontWeight="300"/>
+</font-family>

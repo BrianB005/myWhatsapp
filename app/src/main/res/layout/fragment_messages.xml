@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardCodedText"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/background_dark"
+    android:id="@+id/messages_container"
+    android:foreground="@drawable/modal_overlay"
+    tools:context=".MessagesFragment">
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click the chat icon at the bottom-right of your screen to start chatting with friends and family"
+            android:fontFamily="@font/anton"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:paddingHorizontal="14dp"
+            android:textColor="@color/white"
+            android:id="@+id/zero_chats"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="end"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="40dp"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:cardCornerRadius="50dp"
+            android:id="@+id/open_contacts"
+            android:padding="10dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:backgroundTint="#1F8F0B"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="100dp"
+                android:drawableTint="@color/white"
+                android:drawableLeft="@drawable/ic_baseline_message_24"
+                />
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:src="@drawable/ic_baseline_message_24"-->
+<!--                app:tint="@color/white"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:contentDescription="Start Message"-->
+
+<!--                />-->
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+
+
+
+</FrameLayout>

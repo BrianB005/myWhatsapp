@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardCodedText">
+    <item
+    android:id="@+id/search"
+    android:title="Search Contact"
+    app:actionViewClass="android.widget.SearchView"
+    android:icon="@drawable/ic_baseline_search_icon"
+    app:showAsAction="ifRoom|collapseActionView"
+    android:orderInCategory="100"
+    />
+    <item
+        android:id="@+id/invite"
+        android:title="Invite a friend"
+
+        app:showAsAction="never"
+        android:orderInCategory="101"
+        />
+    <item
+        android:id="@+id/contacts"
+        android:title="Contacts"
+
+        app:showAsAction="never"
+        android:orderInCategory="101"
+        />
+    <item
+        android:id="@+id/refresh"
+        android:title="Refresh"
+
+        app:showAsAction="never"
+        android:orderInCategory="101"
+        />
+    <item
+        android:id="@+id/help"
+        android:title="Help"
+
+        app:showAsAction="never"
+        android:orderInCategory="101"
+        />
+
+
+</menu>

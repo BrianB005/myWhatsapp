@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.brianbett.whatsapp">
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Whatsapp"
+        tools:targetApi="31">
+        <activity
+            android:name=".MyStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeAboutActivity"
+            android:exported="false"
+            android:label="About"
+            android:parentActivityName=".MyProfileActivity" />
+        <activity
+            android:name=".TypeStatusActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".CameraActivity"
+            android:exported="false"
+            android:screenOrientation="fullUser" />
+        <activity
+            android:name=".ContactsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".GalleryActivity"
+            android:exported="false"
+            android:label="" />
+        <activity
+            android:name=".RegisterActivityFour"
+            android:exported="false"
+            android:label=""
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RegisterActivityThree"
+            android:exported="false"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RegisterActivityTwo"
+            android:exported="false"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ViewImageActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfileActivity" />
+        <activity
+            android:name=".StarredMessagesActivity"
+            android:exported="false"
+            android:label="Starred Messages"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".PrivacySecurityActivity"
+            android:exported="false"
+            android:label="Privacy and security"
+            android:parentActivityName=".SettingsActivity" />
+        <activity
+            android:name=".MyProfileActivity"
+            android:exported="false"
+            android:label="My Profile"
+            android:parentActivityName=".SettingsActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="Settings"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"
+            android:label="Profile"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".StatusActivity"
+            android:exported="false"
+            android:label="" />
+        <activity
+            android:name=".MessageActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="Whatsapp" />
+        <activity
+            android:name=".RegisterActivityOne"
+            android:exported="false"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

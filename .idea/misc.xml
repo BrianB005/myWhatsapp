@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/chevron_up.xml" value="0.123" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/circular_view.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/forward.xml" value="0.123" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/ic_baseline_keyboard_voice_24.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/incoming_msg_background.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/incoming_starred_msg.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/incoming_starred_msg_background.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/message_outline.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/modal_overlay.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/outgoing_msg_background.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/outgoing_starred_msg.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/outgoing_starred_msg_background.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/rounded_corners.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/search_icon.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/splash_icon.xml" value="0.16" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/drawable/status_background.xml" value="0.166" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/font/chicle.xml" value="0.2833333333333333" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/font/fonts.xml" value="0.2833333333333333" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout-v28/outgoing_message.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_camera.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_change_about.xml" value="0.14" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_contacts.xml" value="0.11197916666666667" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_gallery.xml" value="0.12952898550724637" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_main.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_message.xml" value="0.22" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_my_profile.xml" value="0.22" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_my_status.xml" value="0.27708333333333335" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_privacy_security.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_profile.xml" value="0.33" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_register_four.xml" value="0.18" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_register_one.xml" value="0.25" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_register_three.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_register_two.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_settings.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_starred_messages.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_status.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_test.xml" value="0.1109375" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_type_status.xml" value="0.11197916666666667" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/activity_view_image.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/change_about_popup.xml" value="0.18840579710144928" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/change_name_popup.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/chat_popup.xml" value="0.21" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/confirm_phone_number_popup.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/contacts_toolbar.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/fragment_calls.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/fragment_camera.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/fragment_message.xml" value="0.2956204379562044" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/fragment_messages.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/fragment_status.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/gallery_popup.xml" value="0.26403985507246375" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/image.xml" value="0.11197916666666667" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/incoming_message.xml" value="0.13323201621073963" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/incoming_starred_message.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/message.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/message_actions.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/message_popup.xml" value="0.25" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/messages_toolbar.xml" value="0.33" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/my_status.xml" value="0.11197916666666667" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/outgoing_message.xml" value="0.16" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/outgoing_starred_message.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/profile_popup.xml" value="0.33" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/profile_popup_call.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/profile_popup_videocall.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/rounded_imagd.xml" value="0.11197916666666667" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/rounded_image.xml" value="0.14" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/single_about.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/single_contact.xml" value="0.21" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/single_message.xml" value="0.1328551912568306" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/single_status.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/snackbar_popup.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/starred_message.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/layout/tool_bar.xml" value="0.2" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu-v26/message_action_bar.xml" value="0.11197916666666667" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/calls_action_bar.xml" value="0.253125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/chat_selected_actionbar.xml" value="0.253125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/contact_toolbar_menu.xml" value="0.11197916666666667" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/home_action_bar.xml" value="0.253125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/message_action_bar.xml" value="0.21" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/message_option_menu.xml" value="0.2520833333333333" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/message_selected_action_bar.xml" value="0.2520833333333333" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/more_vert_menu.xml" value="0.253125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/profile_pop_up.xml" value="0.253125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/single_status_action_bar.xml" value="0.2640625" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/status_action_bar.xml" value="0.253125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/menu/top_tab_elements.xml" value="0.253125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/Whatsapp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1295" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

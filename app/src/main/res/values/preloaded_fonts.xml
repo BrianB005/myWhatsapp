@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/anton</item>
+        <item>@font/baumans</item>
+        <item>@font/chicle</item>
+        <item>@font/droid_sans_bold</item>
+        <item>@font/duru_sans</item>
+        <item>@font/elsie</item>
+        <item>@font/fauna_one</item>
+        <item>@font/gudea_italic</item>
+    </array>
+</resources>

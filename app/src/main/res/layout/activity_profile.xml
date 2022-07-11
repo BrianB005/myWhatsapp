@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ProfileActivity"
+    tools:ignore="HardCodedText">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#171616"
+            android:padding="20dp"
+            android:layout_marginBottom="9dp"
+            android:id="@+id/division1"
+            >
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    app:cardCornerRadius="75dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/image3"
+                        android:layout_gravity="center"
+                        android:id="@+id/profile_pic"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="centerCrop"/>
+                </androidx.cardview.widget.CardView>
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:drawableEnd="@drawable/ic_baseline_more_vert_24"-->
+<!--                    android:gravity="end"-->
+<!--                    android:drawableTint="@color/white"/>-->
+
+<!--            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/top_profile">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/profile_name"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:id="@+id/username"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/phoneNumber"
+                        android:textColor="#9F9595"
+                        android:layout_marginTop="5dp"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="15dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Message"
+                            android:id="@+id/message_user"
+                            android:textColor="#159815"
+                            android:drawableTop="@drawable/ic_baseline_message_24"
+                            android:layout_marginEnd="30dp"
+                            android:gravity="center"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Audio"
+                            android:textColor="#159815"
+                            android:drawableTint="#159815"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:id="@+id/call_user"
+                            android:drawableTop="@drawable/ic_baseline_call_24"
+                            android:layout_marginEnd="30dp"
+                            android:gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Video Call"
+                            android:id="@+id/video_call_user"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:textColor="#159815"
+                            android:drawableTint="#159815"
+                            android:drawableTop="@drawable/ic_baseline_videocam_24"
+                            android:gravity="center"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    <!--    division2-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/division1"
+
+            android:paddingVertical="30dp"
+            android:id="@+id/division2"
+            android:background="#171616"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:paddingHorizontal="20dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mute notifications"
+                    android:textColor="@color/white"
+
+                    android:drawableLeft="@drawable/ic_baseline_notifications_24"
+                    android:drawablePadding="7dp"
+                    />
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mute_notifications"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Custom notifications"
+                android:textColor="@color/white"
+                android:drawableLeft="@drawable/ic_baseline_music_note_24"
+                android:drawablePadding="7dp"
+
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:paddingHorizontal="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Media visibility"
+                android:textColor="@color/white"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:paddingHorizontal="20dp"
+                android:drawableLeft="@drawable/ic_baseline_photo_24"
+                android:drawablePadding="7dp"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:paddingHorizontal="20dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Starred Messages"
+                    android:textColor="@color/white"
+
+                    android:drawableLeft="@drawable/small_star"
+                    android:drawablePadding="7dp"
+                    />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/star_message_count"
+                    android:text="3"
+                    android:gravity="end"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="#B3ADAD"
+                     />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/division3"
+            android:layout_below="@+id/division2"
+            android:background="#171616"
+
+            android:paddingVertical="30dp"
+            android:layout_marginVertical="7dp"
+            >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:paddingHorizontal="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginEnd="12dp"
+
+                android:drawableLeft="@drawable/ic_baseline_enhanced_encryption_24"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Encryption"
+                    android:textColor="@color/white"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:paddingBottom="4dp"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
+                    android:text="Messages and calls are end-to-end encrypted. Tap to verify"
+                    android:textColor="#918E8E"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:paddingHorizontal="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginEnd="12dp"
+                android:drawableLeft="@drawable/ic_baseline_filter_tilt_shift_24"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:drawableStart="@drawable/ic_baseline_enhanced_encryption_24"
+
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Disappearing messages"
+                    android:textColor="@color/white"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
+                    android:text="Off"
+                    android:textColor="#918E8E"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="30dp"
+            android:layout_below="@+id/division3"
+            android:id="@+id/division4"
+            android:background="#171616"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/block"
+                android:drawablePadding="16dp"
+                android:textColor="#C83939"
+                android:textSize="17sp"
+                android:textStyle="italic"
+                android:drawableTint="#C83939"
+                android:drawableLeft="@drawable/ic_baseline_block_24"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:paddingHorizontal="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/report"
+                android:drawablePadding="20dp"
+                android:textColor="#C83939"
+                android:textSize="17sp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:paddingHorizontal="20dp"
+                android:drawableTint="#C83939"
+                android:textStyle="italic"
+                android:drawableLeft="@drawable/ic_baseline_thumb_down_24"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/division4"
+            />
+    </RelativeLayout>
+
+
+</ScrollView>

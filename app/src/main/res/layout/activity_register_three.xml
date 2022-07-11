@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivityThree"
+    tools:ignore="HardCodedText"
+    android:background="@android:color/background_dark">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:paddingVertical="30dp"
+            android:layout_height="wrap_content"
+            android:text="Verifying your number"
+            android:textColor="@color/teal_200"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed-medium"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Kindly enter the 6 digit code sent to +254 724084603"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/otp_prompt"
+            android:layout_gravity="center"
+            android:textColor="#EAE0E0"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wrong number?"
+            android:textStyle="italic"
+            android:textColor="#EAE0E0"
+            android:textSize="15sp"
+            android:clickable="true"
+            android:paddingHorizontal="30dp"
+            android:paddingVertical="10dp"
+            android:focusable="true"
+            android:id="@+id/wrong_number"
+            android:background="?attr/selectableItemBackground"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#158108"
+            android:textColor="#158108"
+            android:hint="--- ---"
+            android:textSize="25sp"
+            android:letterSpacing="0.5"
+            android:textColorHint="#9C9494"
+            android:id="@+id/otp_input"
+            >
+            <requestFocus/>
+        </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter 6-digit code"
+            android:textColor="#41ACA1"
+            android:paddingTop="15dp"
+            android:paddingBottom="20dp"
+            />
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:background="#858181"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="30dp"
+            android:id="@+id/resend_otp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resend sms "
+                android:textColor="#989E9D"
+                android:id="@+id/resend_sms"
+                android:drawableStart="@drawable/ic_baseline_message_24"
+                android:drawableTint="#E1ECEA"
+
+                android:drawablePadding="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1:00"
+                android:id="@+id/countdown"
+                android:textColor="@color/white"
+                android:gravity="end"
+                />
+
+        </LinearLayout>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:background="#858181"
+            android:layout_height="1dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentBottom="true">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verify"
+            app:cornerRadius="6dp"
+            android:id="@+id/verify_btn"
+            android:textSize="18sp"
+            android:paddingVertical="14dp"
+            android:paddingHorizontal="60dp"
+            android:backgroundTint="#066C10"
+
+            />
+    </LinearLayout>
+
+</RelativeLayout>

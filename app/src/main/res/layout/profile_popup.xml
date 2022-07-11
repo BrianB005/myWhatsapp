@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+
+
+    tools:ignore="HardCodedText">
+
+    <ImageView
+        android:id="@+id/profilePicPopUp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:contentDescription="profile"
+        android:src="@drawable/image3"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ivy Cherop"
+
+        android:textColor="@color/teal_200"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/popup_user_name"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/black"
+        android:layout_alignParentBottom="true"
+        android:weightSum="5"
+        >
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTint="#2F8D2F"
+            android:drawableLeft="@drawable/ic_baseline_message_24"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/popup_message"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTint="#2F8D2F"
+            android:drawableLeft="@drawable/ic_baseline_call_24"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/popup_call"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTint="#2F8D2F"
+            android:drawableLeft="@drawable/ic_baseline_videocam_24"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/popup_video_call"
+
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTint="#2F8D2F"
+            android:drawableLeft="@drawable/ic_baseline_info_24"
+            android:clickable="true"
+            android:focusable="true"
+
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/pop_up_open_profile"
+            />
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</RelativeLayout>

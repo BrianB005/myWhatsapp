@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardCodedText"
+    android:focusable="true"
+    android:paddingVertical="18dp"
+    android:clickable="true"
+
+    android:paddingHorizontal="30dp"
+    android:background="?attr/selectableItemBackground"
+
+    >
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nerves of steel"
+        android:layout_weight="1"
+        android:textColor="@color/white"
+        android:ellipsize="end"
+        android:id="@+id/about_text"
+
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:visibility="gone"
+
+        android:id="@+id/progress_update"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Updating"
+            android:textColor="@color/teal_200"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            />
+        <ProgressBar
+            android:layout_width="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="15dp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

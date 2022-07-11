@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "494659420840",
+    "project_id": "mywhatsapp-c5130",
+    "storage_bucket": "mywhatsapp-c5130.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494659420840:android:6f3c96080e5ffe7b78789d",
+        "android_client_info": {
+          "package_name": "com.brianbett.whatsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494659420840-7vk1cph67atc2k043aeqdd01ipn7ij6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3WXBK2udG53iEYEJqc1QvS_xRrfaPoDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494659420840-7vk1cph67atc2k043aeqdd01ipn7ij6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

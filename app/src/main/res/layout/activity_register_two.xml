@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="HardCodedText"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivityTwo"
+    android:background="@android:color/background_dark"
+    android:id="@+id/register_activity_two"
+    android:foreground="@drawable/modal_overlay"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:paddingVertical="30dp"
+                android:layout_height="wrap_content"
+                android:text="Enter your phone number"
+                android:textColor="@color/teal_200"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed-medium"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Whatsapp will need to verify your phone number"
+                android:textColor="#E4DCDC"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kenya"
+                    android:gravity="center"
+                    android:textColor="#E4DCDC"
+                    android:backgroundTint="@color/white"
+                    android:inputType="none"
+                    android:editable="false"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="10dp"
+                >
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+  254"
+                    android:textColor="#E4DCDC"
+                    android:inputType="none"
+                    android:layout_marginEnd="20dp"
+                    android:backgroundTint="#E4DCDC"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/phoneNumberInput"
+                    android:textColor="#E4DCDC"
+                    android:textColorHint="#E4DCDC"
+                    android:hint="phone number"
+                    android:inputType="phone"
+                    android:backgroundTint="#E4DCDC"
+                    android:defaultFocusHighlightEnabled="true"
+                    android:autofillHints="e.g 791630999" >
+                    <requestFocus/>
+                </EditText>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#E4DCDC"
+                android:text="Carrier charges may apply"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#066C10"
+                app:cornerRadius="6dp"
+                android:paddingHorizontal="50dp"
+                android:paddingVertical="15dp"
+                android:layout_marginBottom="60dp"
+                android:text="NEXT"
+                android:gravity="center_horizontal"
+                android:id="@+id/submit_phoneNumber"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

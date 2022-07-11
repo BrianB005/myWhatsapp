@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardCodedText"
+    android:orientation="horizontal"
+    android:paddingStart="100dp"
+    android:paddingEnd="15dp"
+    android:layout_marginVertical="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="end">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/outgoing_msg_background"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Good morning.I hope that you had a great day "
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:id="@+id/text_content"
+            android:fontFamily="monospace"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="21:59"
+            android:layout_marginTop="-10dp"
+            android:gravity="end"
+            android:id="@+id/text_time"
+            android:fontFamily="monospace"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+
+
+            android:textColor="#D6D3D3"/>
+    </LinearLayout>
+
+
+</LinearLayout>

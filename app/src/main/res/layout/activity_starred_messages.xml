@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardCodedText"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#171616"
+    tools:context=".StarredMessagesActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+
+        android:id="@+id/zero_starred_messages"
+        android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="100dp"
+            android:backgroundTint="#1B6E28"
+
+            android:layout_marginBottom="40dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTint="@color/white"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_baseline_star_24"
+                />
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#858282"
+            android:layout_marginHorizontal="40dp"
+            android:text="Tap and hold on any message in any chat to star it so you can easily find it later"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/starred_messages_recycler_view"
+        />
+
+
+
+
+
+</RelativeLayout>

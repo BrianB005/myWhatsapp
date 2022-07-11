@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardCodedText"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TypeStatusActivity"
+    android:id="@+id/type_status_page"
+    android:background="#22AF19"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:gravity="center">
+        <EditText
+            android:id="@+id/status_input"
+            android:layout_width="match_parent"
+            android:layout_height='wrap_content'
+            android:autofillHints="@null"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Type a status"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:paddingHorizontal="42dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="50sp"
+            android:textStyle="bold">
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/open_emojis"
+                android:focusable="true"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:drawableLeftCompat="@drawable/ic_baseline_emoji_emotions_24"
+                app:drawableTint="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="10dp"
+                android:focusable="true"
+                android:clickable="true"
+                android:id="@+id/change_font"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:drawableLeftCompat="@drawable/ic_baseline_format_size_24"
+                app:drawableTint="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="10dp"
+                android:focusable="true"
+                android:clickable="true"
+                android:id="@+id/change_background"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:drawableTint="@color/white"
+                app:drawableLeftCompat="@drawable/ic_baseline_color_lens_24" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Status(Contacts)"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:layout_gravity="center_vertical"
+                android:paddingHorizontal="7dp"
+                app:drawableLeftCompat="@drawable/ic_baseline_chevron_right_24"
+                app:drawableTint="@color/white" />
+            <ProgressBar
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="6dp"
+                android:id="@+id/progress_bar"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="send status"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@color/teal_200"
+                app:rippleColor="@color/white"
+                app:fabSize="mini"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_baseline_send_24"
+                android:id="@+id/send_status"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
