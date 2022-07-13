@@ -19,6 +19,7 @@ import com.brianbett.whatsapp.MainActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -142,8 +143,6 @@ public class RetrofitHandler {
                 Toast.makeText(context,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
     public static void createMessage(Context context,String title,String recipient,View view){
@@ -363,7 +362,7 @@ public class RetrofitHandler {
             public void onResponse( @NonNull Call<ResponseBody> call,
                                     @NonNull Response<ResponseBody> response) {
                 if(!response.isSuccessful()){
-                    Log.v("Upload", response.message());
+                    Log.e("Upload", response.message());
                 }else {
                     Log.v("Upload", "success");
 
@@ -375,6 +374,19 @@ public class RetrofitHandler {
                 Log.e("Upload error:", t.getMessage());
             }
         });
+
+    }
+
+    private static String getMimeType(@NonNull File file){
+        String type;
+        String filePath=file.toString();
+        String extension= MimeTypeMap.getFileExtensionFromUrl(filePath);
+        if(extension!=null){
+            type=MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
+        }else{
+            type="image/*";
+        }
+        return type;
 
     }
     public static  void getMyStatuses(Context context,StatusesInterface statusesInterface){
@@ -398,34 +410,37 @@ public class RetrofitHandler {
                 statusesInterface.failure(t);
             }
         });
-//        List<RetrievedStatus> statuses=null;
-//        try {
-//
-//            statuses=statusCall.execute().body();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Log.d("Exception",e.getMessage());
-//
-//        }
-//        return statuses;
+
+    }
+
+    public static void getMyLastStatus(Context context,StatusesInterface statusesInterface){
+        String token =MyPreferences.getSavedItem(context,"token");
+        Call<List<RetrievedStatus>> statusCall=myApi.getMyLastStatus("Bearer "+token);
+
+        statusCall.enqueue(new Callback<List<RetrievedStatus>>() {
+            @Override
+            public void onResponse( @NonNull Call<List<RetrievedStatus>> call, @NonNull Response<List<RetrievedStatus>> response) {
+                if(!response.isSuccessful()){
+                    Log.e("Exception",response.message());
+                }else{
+                    assert response.body() != null;
+                    statusesInterface.success(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure( @NonNull Call<List<RetrievedStatus>> call,@NonNull Throwable t) {
+                statusesInterface.failure(t);
+            }
+        });
     }
 
 
 
 
-    private static String getMimeType(@NonNull File file){
-        String type;
-        String filePath=file.toString();
-        String extension= MimeTypeMap.getFileExtensionFromUrl(filePath);
-        if(extension!=null){
-            type=MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
-        }else{
-            type="image/*";
-        }
-        return type;
 
-    }
+
+
 
     public static  void createTypedStatus(Context context, TypedStatus typedStatus, ProgressBar progressBar, EditText statusInput){
         String token=MyPreferences.getSavedItem(context,"token");
@@ -478,5 +493,54 @@ public class RetrofitHandler {
 
     }
 
+//    public static void createImageStatus(Context context,ImageStatus imageStatus){
+//
+//    }
 
+
+
+    public static void getFriendsStatuses(Context context, HashMap<String, ArrayList<String>> contacts ,StatusesInterface statusesInterface) {
+        String token = MyPreferences.getSavedItem(context, "token");
+        Call<List<RetrievedStatus>> statusCall = myApi.getFriendsStatuses("Bearer " + token,contacts);
+        statusCall.enqueue(new Callback<List<RetrievedStatus>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<RetrievedStatus>> call, @NonNull Response<List<RetrievedStatus>> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("Exception", response.message());
+                } else {
+                    assert response.body() != null;
+                    statusesInterface.success(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<RetrievedStatus>> call, @NonNull Throwable t) {
+                statusesInterface.failure(t);
+            }
+        });
+
+    }
+
+    public static void getAContactStatuses(Context context,String contactId,StatusesInterface statusesInterface){
+        String token = MyPreferences.getSavedItem(context, "token");
+        Call<List<RetrievedStatus>> statusCall= myApi.getAContactStatuses("Bearer "+token,contactId);
+        statusCall.enqueue(new Callback<List<RetrievedStatus>>() {
+            @Override
+            public void onResponse(Call<List<RetrievedStatus>> call, Response<List<RetrievedStatus>> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("Exceptions", response.message());
+                } else {
+                    assert response.body() != null;
+                    statusesInterface.success(response.body());
+
+                    Log.d("Statuses",response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RetrievedStatus>> call, Throwable t) {
+                statusesInterface.failure(t);
+            }
+        });
+    }
 }

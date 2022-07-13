@@ -4,9 +4,6 @@ import android.graphics.Bitmap;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-
 
 public class Message {
     @SerializedName("title")
@@ -40,7 +37,6 @@ public class Message {
         this.phoneNumber=phoneNumber;
         this.userId=userId;
         this.imageSource=imageSource;
-
     }
 
     public String getMessage() {

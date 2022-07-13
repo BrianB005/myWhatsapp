@@ -75,9 +75,16 @@ public class CameraActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==CAMERA_REQUEST_CODE){
-//            Bitmap bitmap=(Bitmap)data.getExtras().get("data");
-//            imageView.setImageBitmap(bitmap);
-            imageView.setImageURI(imageUri);
+
+            assert data != null;
+
+            Uri imageUri=data.getData();
+//            if (!imageUri.toString().equals("")) {
+                Intent intent = new Intent(CameraActivity.this, HandleSelectedImage.class);
+                intent.putExtra("photo", imageUri.toString());
+                startActivity(intent);
+//            }
+//            finish();
         }
     }
 }

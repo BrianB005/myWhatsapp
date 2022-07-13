@@ -55,16 +55,16 @@ public class ContactsActivity extends AppCompatActivity {
             @Override
             public void success(List<Contact> contacts) {
                 contacts.forEach(contact -> {
-                    //        showing only contacts that are saved on th phone and are in the database
+                    //        showing only contacts that are saved on the phone and are in the database
 
+                    Contact newContact=null;
                     for(PhoneContact phoneContact:phoneContacts){
                         if(phoneContact.getPhoneNumber().equals(contact.getPhoneNumber())){
-                            Contact newContact=new Contact(contact.getPhoneNumber(),contact.getAbout(),contact.getUserId());
+                            newContact=new Contact(contact.getPhoneNumber(),contact.getAbout(),contact.getUserId());
                             newContact.setName(phoneContact.getName());
                             myContacts.add(newContact);
                         }
                     }
-
 
                 });
                 recyclerView=findViewById(R.id.recycler_view);

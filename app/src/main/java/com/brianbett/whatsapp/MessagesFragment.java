@@ -60,6 +60,10 @@ public class MessagesFragment extends Fragment {
     public  Context getMyContext(){
         return context;
     }
+
+
+
+    MyViewModel myViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -207,37 +211,27 @@ public class MessagesFragment extends Fragment {
                     assert  allContacts!=null;
 
 
+
+
                     RetrofitHandler.fetchImage(message.getRecipient().getProfilePic(), new ImageInterface() {
                         @Override
                         public void success(Bitmap bitmap) {
                             message.getRecipient().setImageBitmap(bitmap);
 
-                        }
+//                            Log.d("bitmap",bitmap.toString());
 
+                        }
                         @Override
                         public void failure(Throwable throwable) {
 
                         }
+
                     });
-                    Message message1=new Message(message.getMessage(),message.getRecipient().getPhoneNumber(),message.getRecipient().getUserId(), message.getTime(),message.getRecipient().getImageBitmap());
+                    Message message1=new Message(message.getMessage(),message.getRecipient().getPhoneNumber(),message.getRecipient().getUserId(), message.getTime(),message.getImageSource());
                     messages.add(message1);
-
-
-//                    for (Contact contact:allContacts){
-//                        if(contact.getPhoneNumber().equals(message.getRecipient().getPhoneNumber())){
-//                            name=contact.getName();
-//                            //                            Log.d("name1",name);
-//                        }else{
-//                            name=message.getRecipient().getPhoneNumber();
-//                        }
-//
-//                        message1=new Message(message.getMessage(),name,message.getRecipient().getUserId(), message.getTime(),message.getRecipient().getImageBitmap());
-//                    }
-//
-//                    messages.add(message1);
+                    recyclerViewAdapter.notifyDataSetChanged();
                 }
 
-                recyclerViewAdapter.notifyDataSetChanged();
                 View zeroChats=rootView.findViewById(R.id.zero_chats);
                 if(messages.isEmpty()){
                     zeroChats.setVisibility(View.VISIBLE);

@@ -29,22 +29,22 @@
         android:layout_height="match_parent"
         android:background="#272626"
         android:contentDescription="@null"
-        tools:src="@drawable/image4" />
+         />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/teal_200"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/teal_200"
 
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingHorizontal="42dp"
-            android:textSize="50sp"
-            android:visibility="gone"
-            android:paddingTop="50dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingHorizontal="42dp"
+        android:textSize="50sp"
+        android:visibility="gone"
+        android:paddingTop="50dp"
 
-            android:id="@+id/typedStatus"
-            />
+        android:id="@+id/typedStatus"
+        />
 
     <!--on below line we are creating
         linear layout for our views-->
@@ -101,12 +101,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reply"
+            android:text="Viewers"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:drawableTint="@color/white"
-            android:drawableTop="@drawable/chevron_up"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            app:drawableTint="@color/white"
+            app:drawableTopCompat="@drawable/chevron_up" />
     </LinearLayout>
 
 </merge>
@@ -117,131 +117,3 @@
 
 
 
-
-
-
-
-
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--&lt;!&ndash;we are using merge as a parent layout for merging all our views&ndash;&gt;-->
-<!--<merge xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:ignore="HardcodedText"-->
-
-<!--    tools:context=".MyStatusActivity">-->
-
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:minHeight="?attr/actionBarSize"-->
-<!--        android:theme="?attr/actionBarTheme"-->
-
-<!--        android:id="@+id/toolbar"-->
-<!--        app:layout_editor_absoluteX="0dp"-->
-<!--        app:layout_editor_absoluteY="0dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        />-->
-
-
-<!--    &lt;!&ndash;below is the image view where we will-->
-<!--        be displaying images in our stories&ndash;&gt;-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/image"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="#272626"-->
-
-<!--            android:contentDescription="@null"-->
-<!--            tools:src="@drawable/image4" />-->
-<!--&lt;!&ndash;    <TextView&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:background="@color/teal_200"&ndash;&gt;-->
-
-<!--&lt;!&ndash;        android:textColor="@color/white"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:gravity="center"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:paddingHorizontal="42dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:textSize="50sp"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:visibility="gone"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:paddingTop="50dp"&ndash;&gt;-->
-
-<!--&lt;!&ndash;        android:id="@+id/typedStatus"&ndash;&gt;-->
-<!--&lt;!&ndash;        />&ndash;&gt;-->
-
-
-<!--    &lt;!&ndash;on below line we are creating-->
-<!--        linear layout for our views&ndash;&gt;-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="horizontal">-->
-
-<!--        &lt;!&ndash;view to handle move to previous image&ndash;&gt;-->
-<!--        <View-->
-<!--            android:id="@+id/reverse"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1" />-->
-
-<!--        &lt;!&ndash;view to move to the next image&ndash;&gt;-->
-<!--        <View-->
-<!--            android:id="@+id/skip"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1" />-->
-
-<!--    </LinearLayout>-->
-
-<!--    &lt;!&ndash;below widget is use to create indicator for our stories at top&ndash;&gt;-->
-<!--    <jp.shts.android.storiesprogressview.StoriesProgressView-->
-<!--        android:id="@+id/stories"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="3dp"-->
-<!--        android:layout_gravity="top"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:paddingLeft="10dp"-->
-<!--        android:paddingRight="10dp"-->
-
-<!--        android:translationZ="50dp"/>-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        android:gravity="center"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_marginBottom="5dp"-->
-<!--        >-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:maxLines="4"-->
-<!--            android:ellipsize="end"-->
-<!--            android:id="@+id/status_caption"-->
-
-<!--            android:textSize="18sp"-->
-<!--            />-->
-
-
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Viewers"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="17sp"-->
-<!--            tools:ignore="HardcodedText"-->
-<!--            app:drawableTint="@color/white"-->
-
-<!--            app:drawableTopCompat="@drawable/chevron_up" />-->
-<!--    </LinearLayout>-->
-
-<!--</merge>-->

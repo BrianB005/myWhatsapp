@@ -151,16 +151,13 @@ public class TypeStatusActivity extends AppCompatActivity {
 
         String title = statusInput.getText().toString();
         int selectedFont = 0;
-        if (fontCount > 0) {
-            selectedFont = fontCount - 1;
-        } else {
-            selectedFont = 0;
-            int selectedBackgroundColor = 0;
-            if (backgroundChangeCount > 0) {
-                selectedBackgroundColor = backgroundChangeCount - 1;
-            }
-            String backgroundColor = String.valueOf(backgroundColors[selectedBackgroundColor]);
-            String font = String.valueOf(fonts[selectedFont]);
+        if (fontCount > 0)   selectedFont = fontCount - 1;
+
+        int selectedBackgroundColor = 0;
+        if (backgroundChangeCount > 0)  selectedBackgroundColor = backgroundChangeCount - 1;
+
+        String backgroundColor = String.valueOf(backgroundColors[selectedBackgroundColor]);
+        String font = String.valueOf(fonts[selectedFont]);
 
 
 //        String backgroundColor=backgroundChangeCount==1?String.valueOf(backgroundColors[backgroundChangeCount]):String.valueOf(backgroundColors[backgroundChangeCount-1]);
@@ -168,6 +165,6 @@ public class TypeStatusActivity extends AppCompatActivity {
             TypedStatus typedStatus = new TypedStatus(allContacts, title, font, backgroundColor);
 
             RetrofitHandler.createTypedStatus(getApplicationContext(), typedStatus, progressBar, statusInput);
-        }
+
     }
 }

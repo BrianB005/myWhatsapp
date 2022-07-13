@@ -24,6 +24,9 @@
         android:theme="@style/Theme.Whatsapp"
         tools:targetApi="31">
         <activity
+            android:name=".HandleSelectedImage"
+            android:exported="false" />
+        <activity
             android:name=".MyStatusActivity"
             android:exported="false" />
         <activity

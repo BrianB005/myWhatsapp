@@ -10,23 +10,41 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.brianbett.whatsapp.retrofit.Contact;
+import com.brianbett.whatsapp.retrofit.MyPreferences;
+import com.brianbett.whatsapp.retrofit.RetrievedStatus;
 import com.brianbett.whatsapp.retrofit.RetrofitHandler;
+import com.brianbett.whatsapp.retrofit.StatusesInterface;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class StatusFragment extends Fragment {
     //    the add new status buttons
     View typeStatus,photoStatus;
     RecyclerView recyclerView;
-    ArrayList<SingleStatus> statuses;
+    ArrayList<RetrievedStatus> myStatuses;
+    ArrayList<String> allContacts;
+
+    HashMap<String,ArrayList<String>> myContactsMap;
+
+    StatusRecyclerViewAdapter statusRecyclerViewAdapter;
+    ArrayList<Contact> contactsList;
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.status_action_bar,menu);
@@ -42,13 +60,28 @@ public class StatusFragment extends Fragment {
         View rootView=inflater.inflate(R.layout.fragment_status, container, false);
 
 
+        String contacts = MyPreferences.getSavedItem(getContext(), "myContacts");
+        Type type = new TypeToken<ArrayList<Contact>>() {
+        }.getType();
+        Gson gson = new Gson();
+        contactsList = gson.fromJson(contacts, type);
+
+
+        allContacts = new ArrayList<>();
+       assert  contactsList!=null;
+        for (Contact contact : contactsList) {
+            assert contact != null;
+            allContacts.add(contact.getUserId());
+
+        }
+
 
 //        ensuring that the action bar shows
         setHasOptionsMenu(true);
-        statuses=new ArrayList<>();
+        myStatuses=new ArrayList<>();
 //        configuring the recyclerView
         recyclerView=rootView.findViewById(R.id.status_recycler_view);
-        StatusRecyclerViewAdapter statusRecyclerViewAdapter=new StatusRecyclerViewAdapter(getContext(),statuses);
+        statusRecyclerViewAdapter=new StatusRecyclerViewAdapter(getContext(),myStatuses,contactsList);
         recyclerView.setAdapter(statusRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         typeStatus=rootView.findViewById(R.id.open_new_typed_status);
@@ -60,27 +93,43 @@ public class StatusFragment extends Fragment {
             startActivity(new Intent(getActivity(),CameraActivity.class));
         });
 
+        myContactsMap=new HashMap<>();
 
-//        initializing the statuses  array
-        SingleStatus singleStatus =new SingleStatus(R.drawable.image7,"My status",724084603,"Tap to add a new status");
-        singleStatus.setMine(true);
-        SingleStatus singleStatus1 =new SingleStatus(R.drawable.image2,"Audrey",724084603,"Yesterday 11:24");
-        SingleStatus singleStatus2 =new SingleStatus(R.drawable.image3,"Ses Kush",724084603,"Yesterday 21:35");
-        SingleStatus singleStatus3 =new SingleStatus(R.drawable.image4,"Brian Bett",724084603,"Today 07:09");
-        SingleStatus singleStatus4 =new SingleStatus(R.drawable.image5,"Ivy Cherop",724084603,"56 minutes ago");
-        SingleStatus singleStatus5 =new SingleStatus(R.drawable.image4,"Stella",724084603,"Today 12:35");
-        SingleStatus singleStatus6 =new SingleStatus(R.drawable.image6,"Stacy",724084603,"Today 02:35");
-        SingleStatus singleStatus7 =new SingleStatus(R.drawable.image7,"Drake",724084603,"Yesterday 06:04");
-        SingleStatus singleStatus8 =new SingleStatus(R.drawable.image1,"Kim Yun",724084603,"Yesterday 21:30");
-        SingleStatus singleStatus9 =new SingleStatus(R.drawable.image3,"Bernice",724049005,"43 minutes ago");
+        myContactsMap.put("contacts",allContacts);
 
-        statuses.add(singleStatus);statuses.add(singleStatus1);statuses.add(singleStatus2);statuses.add(singleStatus3);
-        statuses.add(singleStatus4);statuses.add(singleStatus5);statuses.add(singleStatus6);statuses.add(singleStatus7);
-        statuses.add(singleStatus8);statuses.add(singleStatus9);statuses.add(singleStatus2);statuses.add(singleStatus3);
+        RetrofitHandler.getMyLastStatus(getContext(), new StatusesInterface() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void success(List<RetrievedStatus> statuses) {
 
+                myStatuses.add(0,statuses.get(0));
+                statusRecyclerViewAdapter.notifyDataSetChanged();
+
+                Log.d("MyStatus",statuses.toString());
+
+            }
+            @Override
+            public void failure(Throwable throwable) {
+
+            }
+        });
+        RetrofitHandler.getFriendsStatuses(getContext(), myContactsMap, new StatusesInterface() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void success(List<RetrievedStatus> statuses) {
+                myStatuses.addAll(statuses);
+                statusRecyclerViewAdapter.notifyDataSetChanged();
+
+            }
+            @Override
+            public void failure(Throwable throwable) {
+                Log.d("Exception Oops!",throwable.getMessage());
+            }
+        });
 
         return rootView;
     }
+
 
 
     @SuppressLint("NonConstantResourceId")

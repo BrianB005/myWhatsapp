@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class ImageStatus extends CreatedStatus{
 
     private final String caption;
-    private final String statusImage;
-    public ImageStatus(ArrayList<String> contacts, String caption,String statusImage){
+//    private final String statusImage;
+    public ImageStatus(ArrayList<String> contacts, String caption){
         super(contacts);
 
-        this.statusImage=statusImage;
+//        this.statusImage=statusImage;
         this.caption=caption;
     }
 
@@ -17,7 +17,7 @@ public class ImageStatus extends CreatedStatus{
         return caption;
     }
 
-    public String getStatusImage() {
-        return statusImage;
-    }
+//    public String getStatusImage() {
+//        return statusImage;
+//    }
 }

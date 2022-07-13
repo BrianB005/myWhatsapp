@@ -13,12 +13,13 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-
         android:id="@+id/toolbar"
         app:layout_editor_absoluteX="0dp"
         app:layout_editor_absoluteY="0dp"
         android:layout_marginTop="10dp"
         />
+
+
 
 
     <!--below is the image view where we will
@@ -29,7 +30,21 @@
         android:layout_height="match_parent"
         android:background="#272626"
         android:contentDescription="@null"
-        tools:src="@drawable/image4" />
+         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/teal_200"
+
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingHorizontal="42dp"
+        android:textSize="50sp"
+        android:visibility="gone"
+        android:paddingTop="50dp"
+
+        android:id="@+id/typedStatus"
+        />
 
     <!--on below line we are creating
         linear layout for our views-->
@@ -76,10 +91,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/caption"
+            android:id="@+id/status_caption"
             android:textColor="@color/white"
             android:layout_marginBottom="5dp"
-            android:text="Hello there.This is a caption"
+
             />
 
 
@@ -89,9 +104,9 @@
             android:text="Reply"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:drawableTint="@color/white"
-            android:drawableTop="@drawable/chevron_up"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            app:drawableTint="@color/white"
+            app:drawableTopCompat="@drawable/chevron_up" />
     </LinearLayout>
 
 </merge>

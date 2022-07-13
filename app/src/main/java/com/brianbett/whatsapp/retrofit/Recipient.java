@@ -19,8 +19,6 @@ public class Recipient {
         return userProfilePic;
     }
 
-
-
     public Bitmap getImageBitmap() {
         return imageBitmap;
     }

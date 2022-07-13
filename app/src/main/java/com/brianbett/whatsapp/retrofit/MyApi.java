@@ -1,6 +1,7 @@
 package com.brianbett.whatsapp.retrofit;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,10 +68,20 @@ public interface MyApi {
     @POST("statuses/createTyped")
     Call<TypedStatus> createTypedStatus(@Header ("Authorization") String token,@Body TypedStatus typedStatus );
 
-
+    @POST("statuses/createImaged")
+    Call<TypedStatus> createImageStatus(@Header ("Authorization") String token,@Body ImageStatus typedStatus );
     @GET("statuses/getMyStatuses")
     Call<List<RetrievedStatus>> getMyStatuses(@Header ("Authorization") String token);
 
+    @GET("statuses/getMyStatuses/last")
+    Call<List<RetrievedStatus>> getMyLastStatus(@Header ("Authorization") String token);
+
+    @POST("statuses/getFriendsStatuses")
+    Call<List<RetrievedStatus>> getFriendsStatuses(@Header ("Authorization") String token,@Body HashMap<String, ArrayList<String>> contacts);
+
     @GET("images/{imageName}")
     Call<ResponseBody> fetchImage(@Path(value="imageName",encoded=true) String imageUrl);
+
+    @GET("statuses/contactStatuses/{contactId}")
+    Call<List<RetrievedStatus>> getAContactStatuses(@Header ("Authorization") String token,@Path(value="contactId",encoded=true) String imageUrl);
 }

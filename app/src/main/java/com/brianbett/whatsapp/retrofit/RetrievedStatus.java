@@ -2,18 +2,19 @@ package com.brianbett.whatsapp.retrofit;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 public class RetrievedStatus{
     private String caption;
     private String statusImage;
-
-    private String sender;
+    @SerializedName("_id")
+    private String statusId;
+    @SerializedName("sender")
+    private Recipient nestedUserDetails;
 
     private   String backgroundColor;
     private  String font;
     private  boolean isTyped;
     private  String title;
+
 
     @SerializedName("createdAt")
     private String timeCreated;
@@ -26,8 +27,8 @@ public class RetrievedStatus{
         return statusImage;
     }
 
-    public String getSender() {
-        return sender;
+    public Recipient getNestedUserDetails() {
+        return nestedUserDetails;
     }
 
     public String getBackgroundColor() {
@@ -45,8 +46,13 @@ public class RetrievedStatus{
     public String getTitle() {
         return title;
     }
-
     public String getTimeCreated() {
         return timeCreated;
     }
+
+    public String getStatusId() {
+        return statusId;
+    }
+
+
 }
