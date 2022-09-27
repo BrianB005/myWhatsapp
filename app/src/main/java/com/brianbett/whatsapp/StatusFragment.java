@@ -1,15 +1,11 @@
 package com.brianbett.whatsapp;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,22 +13,36 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.brianbett.whatsapp.retrofit.Contact;
 import com.brianbett.whatsapp.retrofit.MyPreferences;
 import com.brianbett.whatsapp.retrofit.RetrievedStatus;
 import com.brianbett.whatsapp.retrofit.RetrofitHandler;
 import com.brianbett.whatsapp.retrofit.StatusesInterface;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.github.drjacky.imagepicker.ImagePicker;
+import com.github.drjacky.imagepicker.constant.ImageProvider;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.Intrinsics;
 
 public class StatusFragment extends Fragment {
     //    the add new status buttons
@@ -52,6 +62,7 @@ public class StatusFragment extends Fragment {
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,14 +70,13 @@ public class StatusFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView=inflater.inflate(R.layout.fragment_status, container, false);
 
+        assert getContext()!=null;
 
         String contacts = MyPreferences.getSavedItem(getContext(), "myContacts");
         Type type = new TypeToken<ArrayList<Contact>>() {
         }.getType();
         Gson gson = new Gson();
         contactsList = gson.fromJson(contacts, type);
-
-
         allContacts = new ArrayList<>();
        assert  contactsList!=null;
         for (Contact contact : contactsList) {
@@ -81,7 +91,8 @@ public class StatusFragment extends Fragment {
         myStatuses=new ArrayList<>();
 //        configuring the recyclerView
         recyclerView=rootView.findViewById(R.id.status_recycler_view);
-        statusRecyclerViewAdapter=new StatusRecyclerViewAdapter(getContext(),myStatuses,contactsList);
+        assert getActivity()!=null;
+        statusRecyclerViewAdapter=new StatusRecyclerViewAdapter(getActivity().getApplicationContext(),myStatuses,contactsList);
         recyclerView.setAdapter(statusRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         typeStatus=rootView.findViewById(R.id.open_new_typed_status);
@@ -89,9 +100,40 @@ public class StatusFragment extends Fragment {
         typeStatus.setOnClickListener(view -> {
             startActivity(new Intent(getActivity(),TypeStatusActivity.class));
         });
-        photoStatus.setOnClickListener(view -> {
-            startActivity(new Intent(getActivity(),CameraActivity.class));
-        });
+
+
+
+//        picking image from camera
+
+        ActivityResultLauncher<Intent> launcher =
+                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), (ActivityResult result) -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        assert result.getData() != null;
+                        Uri uri = result.getData().getData();
+                        Intent intent=new Intent(getContext(),HandleSelectedImage.class);
+                        intent.putExtra("photo",uri.toString());
+                        startActivity(intent);
+                        // Use the uri to load the image
+                    } else if (result.getResultCode() == ImagePicker.RESULT_ERROR) {
+
+                        Log.d("Error",ImagePicker.Companion.getError(result.getData()));
+                    }
+                });
+        photoStatus.setOnClickListener(view-> ImagePicker.Companion.with(getActivity())
+                .crop()
+                .provider(ImageProvider.BOTH)
+                .createIntentFromDialog(new Function1() {
+                    public Object invoke(Object var1) {
+                        this.invoke((Intent) var1);
+                        return Unit.INSTANCE;
+                    }
+
+                    public void invoke(@NotNull Intent it) {
+                        Intrinsics.checkNotNullParameter(it, "it");
+                        launcher.launch(it);
+                    }
+                })
+        );
 
         myContactsMap=new HashMap<>();
 
@@ -102,10 +144,20 @@ public class StatusFragment extends Fragment {
             @Override
             public void success(List<RetrievedStatus> statuses) {
 
-                myStatuses.add(0,statuses.get(0));
+                if(statuses.size()!=0) {
+                    myStatuses.add(0, statuses.get(0));
+
+                }else{
+                    RetrievedStatus retrievedStatus=new RetrievedStatus();
+                    retrievedStatus.setTimeCreated("Tap here to add a status update!");
+                    myStatuses.add(0, retrievedStatus);
+
+                }
                 statusRecyclerViewAdapter.notifyDataSetChanged();
 
-                Log.d("MyStatus",statuses.toString());
+
+
+
 
             }
             @Override

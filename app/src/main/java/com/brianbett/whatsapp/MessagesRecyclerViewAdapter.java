@@ -3,7 +3,6 @@ package com.brianbett.whatsapp;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.brianbett.whatsapp.retrofit.ChatMessage;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.prefs.Preferences;
 
 public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<MessagesRecyclerViewAdapter.MyViewHolder>{
     Context context;
@@ -99,10 +94,7 @@ public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<MessagesRe
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.message.setText(messages.get(position).getMessage());
 
-
-
-
-        holder.time.setText(messages.get(position).getTime());
+        holder.time.setText(ConvertTimestamp.getTime(messages.get(position).getTime()));
 
 
     }

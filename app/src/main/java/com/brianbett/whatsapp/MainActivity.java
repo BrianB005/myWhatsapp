@@ -1,34 +1,19 @@
 package com.brianbett.whatsapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.PopupMenu;
-import android.widget.TextView;
-
-
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
-
-    SharedPreferences preferences;
-    String token;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabsLayout);
 
+
+        LinearLayout layout = ((LinearLayout) ((LinearLayout) tabLayout.getChildAt(0)).getChildAt(0));
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();
+        layoutParams.weight = 0.5f; // e.g. 0.5f
+        layout.setLayoutParams(layoutParams);
         //        setting up view pager for switching fragments
         viewPager2 = findViewById(R.id.container);
         viewPagerAdapter = new ViewPagerAdapter(this, tabLayout);
@@ -45,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        ensures that the messages fragment is displayed by default and the corresponding tab selected
         viewPager2.setCurrentItem(1);
-        tabLayout.getTabAt(1).select();
+        Objects.requireNonNull(tabLayout.getTabAt(1)).select();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -69,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                tabLayout.getTabAt(position).select();
+                Objects.requireNonNull(tabLayout.getTabAt(position)).select();
             }
         });
     }

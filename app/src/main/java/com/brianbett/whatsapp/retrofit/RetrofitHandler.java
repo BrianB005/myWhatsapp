@@ -3,12 +3,8 @@ package com.brianbett.whatsapp.retrofit;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -17,15 +13,10 @@ import androidx.annotation.NonNull;
 
 import com.brianbett.whatsapp.MainActivity;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,9 +45,6 @@ public class RetrofitHandler {
     public static void getAllChats(Context context, MessagesInterface messagesInterface){
         preferences=context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         token=preferences.getString("token",null);
-
-
-
 
         Call<List<Message>> apiCall = myApi.getAllChats("Bearer "+token);
         apiCall.enqueue(new Callback<List<Message>>() {
@@ -96,13 +84,13 @@ public class RetrofitHandler {
 
 
 
-        Call<User> userCall=myApi.createUser(userDetails);
+        Call<AuthUser> userCall=myApi.createUser(userDetails);
 //        Call<User> userCall=myApi.createUser(username, phoneNumber);
 
-        userCall.enqueue(new Callback<User>() {
+        userCall.enqueue(new Callback<AuthUser>() {
 
             @Override
-            public void onResponse( @NonNull Call<User> call,  @NonNull Response<User> response) {
+            public void onResponse( @NonNull Call<AuthUser> call,  @NonNull Response<AuthUser> response) {
                 view.setVisibility(View.GONE);
                 if(!response.isSuccessful()){
 
@@ -111,7 +99,7 @@ public class RetrofitHandler {
                     Toast.makeText(context,response.message(),Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    User user=response.body();
+                    AuthUser user=response.body();
                     assert user != null;
                     String token=user.getToken();
                     //int phoneNumber=user.getUserDetails().getPhoneNumber();;
@@ -126,7 +114,7 @@ public class RetrofitHandler {
                     }
                     try{
 
-                        editor.putString("userId",user.getUserId()).apply();
+                        editor.putString("userId",user.getUser().getUserId()).apply();
                     }catch (Exception e){
                         Log.d("Exception",e.getMessage());
                     }
@@ -139,7 +127,7 @@ public class RetrofitHandler {
             }
 
             @Override
-            public void onFailure( @NonNull Call<User> call,  @NonNull Throwable t) {
+            public void onFailure( @NonNull Call<AuthUser> call,  @NonNull Throwable t) {
                 Toast.makeText(context,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
@@ -247,19 +235,8 @@ public class RetrofitHandler {
                 else{
                     User user=response.body();
                     assert user!=null;
-                    fetchImage(user.getProfilePic(), new ImageInterface() {
-                        @Override
-                        public void success(Bitmap bitmap) {
-                            user.setProfileBitmap(bitmap);
 
-                            userInterface.success(user);
-                        }
-
-                        @Override
-                        public void failure(Throwable throwable) {
-                            userInterface.failure(throwable);
-                        }
-                    });
+                    userInterface.success(user);
                 }
             }
 
@@ -286,19 +263,7 @@ public class RetrofitHandler {
                  else{
                      User user= response.body();
                      assert user!=null;
-                     fetchImage(user.getProfilePic(), new ImageInterface() {
-                         @Override
-                         public void success(Bitmap bitmap) {
-                             user.setProfileBitmap(bitmap);
-
-                             userInterface.success(user);
-                         }
-
-                         @Override
-                         public void failure(Throwable throwable) {
-                             userInterface.failure(throwable);
-                         }
-                     });
+                    userInterface.success(user);
 
                  }
              }
@@ -332,72 +297,73 @@ public class RetrofitHandler {
         });
     }
 
-    public static void uploadFile(Uri fileUri,Context context){
+//    public static void uploadFile(Uri fileUri,Context context){
+//
+////        File file = FileUtils.getFile(context, fileUri);
+//
+//        File file=new File(fileUri.getPath());
+//
+//
+//        RequestBody requestFile =
+//                RequestBody.create(
+//                        MediaType.parse(getMimeType(file)),
+//                        file
+//                );
+//
+//
+//        MultipartBody.Part body =
+//                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+//        String descriptionString = "User profile";
+//        RequestBody description =
+//                RequestBody.create(
+//                        okhttp3.MultipartBody.FORM, descriptionString);
+//
+//        // finally, execute the request
+//
+//        String token =MyPreferences.getSavedItem(context,"token");
+//        Call<ResponseBody> call = myApi.uploadImage("Bearer "+token, body);
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse( @NonNull Call<ResponseBody> call,
+//                                    @NonNull Response<ResponseBody> response) {
+//                if(!response.isSuccessful()){
+//                    Log.e("Upload", response.message());
+//                }else {
+//                    Log.v("Upload", "success");
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure( @NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+//                Log.e("Upload error:", t.getMessage());
+//            }
+//        });
+//
+//    }
 
-//        File file = FileUtils.getFile(context, fileUri);
-
-        File file=new File(fileUri.getPath());
-
-
-        RequestBody requestFile =
-                RequestBody.create(
-                        MediaType.parse(getMimeType(file)),
-                        file
-                );
-
-
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-        String descriptionString = "User profile";
-        RequestBody description =
-                RequestBody.create(
-                        okhttp3.MultipartBody.FORM, descriptionString);
-
-        // finally, execute the request
-
+//    private static String getMimeType(@NonNull File file){
+//        String type;
+//        String filePath=file.toString();
+//        String extension= MimeTypeMap.getFileExtensionFromUrl(filePath);
+//        if(extension!=null){
+//            type=MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
+//        }else{
+//            type="image/*";
+//        }
+//        return type;
+//
+//    }
+    public static  void getMyStatuses(Context context,MyStatusesInterface statusesInterface){
         String token =MyPreferences.getSavedItem(context,"token");
-        Call<ResponseBody> call = myApi.uploadImage("Bearer "+token,description, body);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<List<MyRetrievedStatus>> statusCall=myApi.getMyStatuses("Bearer "+token);
+
+        statusCall.enqueue(new Callback<List<MyRetrievedStatus>>() {
             @Override
-            public void onResponse( @NonNull Call<ResponseBody> call,
-                                    @NonNull Response<ResponseBody> response) {
-                if(!response.isSuccessful()){
-                    Log.e("Upload", response.message());
-                }else {
-                    Log.v("Upload", "success");
-
-                }
-            }
-
-            @Override
-            public void onFailure( @NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                Log.e("Upload error:", t.getMessage());
-            }
-        });
-
-    }
-
-    private static String getMimeType(@NonNull File file){
-        String type;
-        String filePath=file.toString();
-        String extension= MimeTypeMap.getFileExtensionFromUrl(filePath);
-        if(extension!=null){
-            type=MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
-        }else{
-            type="image/*";
-        }
-        return type;
-
-    }
-    public static  void getMyStatuses(Context context,StatusesInterface statusesInterface){
-        String token =MyPreferences.getSavedItem(context,"token");
-        Call<List<RetrievedStatus>> statusCall=myApi.getMyStatuses("Bearer "+token);
-
-        statusCall.enqueue(new Callback<List<RetrievedStatus>>() {
-            @Override
-            public void onResponse( @NonNull Call<List<RetrievedStatus>> call, @NonNull Response<List<RetrievedStatus>> response) {
+            public void onResponse( @NonNull Call<List<MyRetrievedStatus>> call, @NonNull Response<List<MyRetrievedStatus>> response) {
                 if(!response.isSuccessful()){
                     Log.e("Exception",response.message());
+                    statusesInterface.errorExists();
                 }else{
                     assert response.body() != null;
                     statusesInterface.success(response.body());
@@ -406,7 +372,7 @@ public class RetrofitHandler {
             }
 
             @Override
-            public void onFailure( @NonNull Call<List<RetrievedStatus>> call,@NonNull Throwable t) {
+            public void onFailure( @NonNull Call<List<MyRetrievedStatus>> call,@NonNull Throwable t) {
                 statusesInterface.failure(t);
             }
         });
@@ -452,7 +418,6 @@ public class RetrofitHandler {
             @Override
             public void onResponse( @NonNull Call<TypedStatus> call,@NonNull Response<TypedStatus> response) {
                 progressBar.setVisibility(View.GONE);
-
                 if(!response.isSuccessful()){
                     Log.d("Error",response.message());
 
@@ -473,29 +438,99 @@ public class RetrofitHandler {
     }
 
 
-    public static void fetchImage(String imageName,ImageInterface imageInterface){
-        Call<ResponseBody> imageCall= myApi.fetchImage(imageName);
+//    public static void fetchImage(String imageName,ImageInterface imageInterface){
+//        Call<ResponseBody> imageCall= myApi.fetchImage(imageName);
+//
+//        imageCall.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(@NonNull Call<ResponseBody> call,@NonNull Response<ResponseBody> response) {
+//               if(!response.isSuccessful()){
+//                   Log.d("Exception",response.message());
+//               }else {
+//                   assert response.body() != null;
+//                   Bitmap bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+//                   imageInterface.success(bitmap);
+//               }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
+//                imageInterface.failure(t);
+//
+//            }
+//        });
+//
+//    }
 
-        imageCall.enqueue(new Callback<ResponseBody>() {
+
+//    public static void createImageStatus(Context context,Uri fileUri,ImageStatus imageStatus,UploadStatusSuccess uploadStatusSuccess){
+//
+//        File file=new File(fileUri.getPath());
+//
+//
+//
+//
+//        RequestBody requestFile =
+//                RequestBody.create(
+//                        MediaType.parse(getMimeType(file)),
+//                        file
+//                );
+//
+//
+//        MultipartBody.Part body =
+//                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+//
+//
+//        String token =MyPreferences.getSavedItem(context,"token");
+////        Call<ResponseBody> call = myApi.uploadImagedStatus("Bearer "+token,imageStatus.getCaption(),imageStatus.getContacts(),body);
+//        Call<ResponseBody> call = myApi.uploadImagedStatus("Bearer "+token,imageStatus.getCaption(),imageStatus.getContacts(),body);
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse( @NonNull Call<ResponseBody> call,
+//                                    @NonNull Response<ResponseBody> response) {
+//                if(!response.isSuccessful()){
+//                    Log.e("Upload", response.message());
+//                }else {
+//                    Log.v("Upload",String.valueOf(response.body()));
+//                    uploadStatusSuccess.success();
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure( @NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+//                Log.e("Upload error:", t.getMessage());
+//                uploadStatusSuccess.failure(t);
+//            }
+//        });
+//    }
+
+    public static  void createImageStatus(Context context,ImageStatus imageStatus,UploadStatusSuccess uploadStatusSuccess){
+        String token=MyPreferences.getSavedItem(context,"token");
+
+        Call<ResponseBody> statusCall= myApi.uploadImageStatus("Bearer "+token,imageStatus);
+        statusCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call,@NonNull Response<ResponseBody> response) {
-                assert response.body()!=null;
-                Bitmap bitmap= BitmapFactory.decodeStream(response.body().byteStream());
-                imageInterface.success(bitmap);
+                if(!response.isSuccessful()){
+                    Toast.makeText(context,response.message(),Toast.LENGTH_SHORT).show();
+                }else{
+                    uploadStatusSuccess.success();
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
-                imageInterface.failure(t);
 
+                uploadStatusSuccess.failure(t);
             }
         });
 
+
     }
 
-//    public static void createImageStatus(Context context,ImageStatus imageStatus){
-//
-//    }
+
+
 
 
 
@@ -526,7 +561,7 @@ public class RetrofitHandler {
         Call<List<RetrievedStatus>> statusCall= myApi.getAContactStatuses("Bearer "+token,contactId);
         statusCall.enqueue(new Callback<List<RetrievedStatus>>() {
             @Override
-            public void onResponse(Call<List<RetrievedStatus>> call, Response<List<RetrievedStatus>> response) {
+            public void onResponse(@NonNull Call<List<RetrievedStatus>> call,@NonNull Response<List<RetrievedStatus>> response) {
                 if (!response.isSuccessful()) {
                     Log.e("Exceptions", response.message());
                 } else {
@@ -538,9 +573,36 @@ public class RetrofitHandler {
             }
 
             @Override
-            public void onFailure(Call<List<RetrievedStatus>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<RetrievedStatus>> call,@NonNull Throwable t) {
                 statusesInterface.failure(t);
             }
         });
     }
+
+    public static void viewStatus(Context context,String statusId){
+        String token = MyPreferences.getSavedItem(context, "token");
+        Call<ResponseBody> statusCall= myApi.viewStatus("Bearer "+token,statusId);
+        statusCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call,@NonNull Response<ResponseBody> response) {
+                if(!response.isSuccessful()){
+                    Log.d("Error","Something went wrong");
+                }else{
+                    Log.d("Success","Status viewed");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
+
+                Log.d("Exception",t.getMessage());
+            }
+        });
+    }
+
+
+
+
+
+
 }

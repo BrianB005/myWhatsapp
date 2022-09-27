@@ -1,14 +1,6 @@
 package com.brianbett.whatsapp.retrofit;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.lang.reflect.Type;
 
 public class Contact {
     private final String phoneNumber;
@@ -16,13 +8,18 @@ public class Contact {
     @SerializedName("_id")
     private  final String userId;
     private String name;
+    private final String profilePic;
 
-    public Contact(String phoneNumber, String about,String userId) {
+    public Contact(String phoneNumber, String about,String userId,String profilePic) {
         this.phoneNumber = phoneNumber;
         this.about = about;
         this.userId=userId;
+        this.profilePic=profilePic;
     }
 
+    public String getProfilePic() {
+        return profilePic;
+    }
 
     public String getName() {
         return name;

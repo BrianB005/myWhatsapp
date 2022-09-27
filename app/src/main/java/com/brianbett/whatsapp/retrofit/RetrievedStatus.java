@@ -50,9 +50,17 @@ public class RetrievedStatus{
         return timeCreated;
     }
 
+
+
     public String getStatusId() {
         return statusId;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
+    public void setTimeCreated(String timeCreated) {
+        this.timeCreated = timeCreated;
+    }
 }

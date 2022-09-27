@@ -1,7 +1,5 @@
 package com.brianbett.whatsapp.retrofit;
 
-import android.graphics.Bitmap;
-
 import com.google.gson.annotations.SerializedName;
 
 
@@ -14,6 +12,8 @@ public class Message {
     private final String phoneNumber;
     @SerializedName("_id")
     private final String userId;
+
+    private final String profilePic;
 
     public Recipient getRecipient() {
         return recipient;
@@ -28,15 +28,19 @@ public class Message {
     }
 
 
-    private  final Bitmap imageSource;
+//    private  final Bitmap imageSource;
 
 
-    public Message(String message, String phoneNumber,String userId, String time,Bitmap imageSource) {
+    public Message(String message, String phoneNumber,String userId, String time,String profilePic) {
         this.message = message;
         this.time = time;
         this.phoneNumber=phoneNumber;
         this.userId=userId;
-        this.imageSource=imageSource;
+        this.profilePic=profilePic;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
     }
 
     public String getMessage() {
@@ -51,7 +55,7 @@ public class Message {
         return time;
     }
 
-    public Bitmap getImageSource() {
-        return imageSource;
-    }
+//    public Bitmap getImageSource() {
+//        return imageSource;
+//    }
 }

@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewImageActivity"
-    android:background="#171616"
+    android:background="@android:color/background_dark"
     >
     <ImageView
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:src="@drawable/image3"
+        android:contentDescription="Profile Image"
         android:scaleType="centerCrop"
-        />
+        android:id="@+id/image"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

@@ -1,10 +1,10 @@
 package com.brianbett.whatsapp;
 
 import android.annotation.SuppressLint;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,30 +14,26 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.brianbett.whatsapp.retrofit.RetrievedStatus;
 import com.brianbett.whatsapp.retrofit.RetrofitHandler;
 import com.brianbett.whatsapp.retrofit.StatusesInterface;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import jp.shts.android.storiesprogressview.StoriesProgressView;
 
 public class StatusActivity extends AppCompatActivity implements StoriesProgressView.StoriesListener {
+    View loadingStatus;
 
     public static void setStatuses(List<RetrievedStatus> statuses) {
         StatusActivity.statuses = statuses;
@@ -124,19 +120,19 @@ public class StatusActivity extends AppCompatActivity implements StoriesProgress
         typedStatus=findViewById(R.id.typedStatus);
         statusCaption=findViewById(R.id.status_caption);
         storiesProgressView = findViewById(R.id.stories);
+        loadingStatus=findViewById(R.id.status_loading);
 
 
         RetrofitHandler.getAContactStatuses(getApplicationContext(), contactId, new StatusesInterface() {
             @Override
             public void success(List<RetrievedStatus> statuses) {
                 StatusActivity.setStatuses(statuses);
-                handleStatus(statuses.get(counter), StatusActivity.this, image, statusCaption, typedStatus, actionBar);
+                handleStatus(statuses.get(counter), StatusActivity.this,loadingStatus, image, statusCaption, typedStatus, actionBar);
                 storiesProgressView.setStoriesCount(statuses.size());
 
                 storiesProgressView.setStoryDuration(3000L);
                 storiesProgressView.setStoriesListener(StatusActivity.this);
                 storiesProgressView.startStories(counter);
-
 
             }
 
@@ -175,13 +171,13 @@ public class StatusActivity extends AppCompatActivity implements StoriesProgress
 
     @Override
     public void onNext() {
-        handleStatus(statuses.get(++counter), StatusActivity.this, image, statusCaption, typedStatus, actionBar);
+        handleStatus(statuses.get(++counter), StatusActivity.this,loadingStatus, image, statusCaption, typedStatus, actionBar);
     }
 
     @Override
     public void onPrev() {
         if ((counter - 1) < 0) return;
-        handleStatus(statuses.get(--counter), StatusActivity.this, image, statusCaption, typedStatus, actionBar);
+        handleStatus(statuses.get(--counter), StatusActivity.this,loadingStatus, image, statusCaption, typedStatus, actionBar);
 
     }
 
@@ -212,7 +208,7 @@ public class StatusActivity extends AppCompatActivity implements StoriesProgress
         finish();
     }
 
-    private static void handleStatus(RetrievedStatus status, Context context, ImageView image, TextView statusCaption, TextView typedStatus, ActionBar actionBar){
+    private static void handleStatus(RetrievedStatus status, Context context,View loadingStatus ,ImageView image, TextView statusCaption, TextView typedStatus, ActionBar actionBar){
         if(status.isTyped()){
             image.setVisibility(View.GONE);
             statusCaption.setVisibility(View.GONE);
@@ -225,8 +221,25 @@ public class StatusActivity extends AppCompatActivity implements StoriesProgress
             image.setVisibility(View.VISIBLE);
             statusCaption.setVisibility(View.VISIBLE);
             typedStatus.setVisibility(View.GONE);
+            loadingStatus.setVisibility(View.GONE);
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference("images/" + status.getStatusImage());
+
+
+            Task<Uri> uriTask = storageReference.getDownloadUrl();
+
+            uriTask.addOnSuccessListener(uri1 -> {
+
+                Glide.with(context).load(uri1).into(image);
+                loadingStatus.setVisibility(View.GONE);
+            }).addOnFailureListener(e -> {
+
+                loadingStatus.setVisibility(View.GONE);
+                Toast.makeText(context, "Something went wrong loading data!Try again later.", Toast.LENGTH_SHORT).show();
+                Log.e("Exception",e.getMessage());
+            });
         }
-        actionBar.setSubtitle(status.getTimeCreated());
+        RetrofitHandler.viewStatus(context.getApplicationContext(), status.getStatusId());
+        actionBar.setSubtitle(ConvertTimestamp.getStatusMoments(context,status.getTimeCreated()));
 
     }
 

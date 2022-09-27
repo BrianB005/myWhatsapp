@@ -9,7 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -28,10 +27,10 @@ import com.brianbett.whatsapp.retrofit.ChatMessage;
 import com.brianbett.whatsapp.retrofit.ChatMessagesInterface;
 import com.brianbett.whatsapp.retrofit.MyPreferences;
 import com.brianbett.whatsapp.retrofit.RetrofitHandler;
+import com.bumptech.glide.Glide;
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
 import com.pusher.client.channel.Channel;
-
 import com.pusher.client.connection.ConnectionEventListener;
 import com.pusher.client.connection.ConnectionState;
 import com.pusher.client.connection.ConnectionStateChange;
@@ -121,6 +120,9 @@ public class MessageActivity extends AppCompatActivity {
 //        updating the username at the top of the activity
         TextView usernameView= findViewById(R.id.username);
         usernameView.setText(username==null?recipientId:username);
+        ImageView profilePic=findViewById(R.id.profile_pic);
+        String profileUri=intent.getStringExtra("profilePic");
+        Glide.with(getApplicationContext()).load(profileUri).into(profilePic);
 //
         Toolbar parent=(Toolbar) view.getParent();
         parent.setPadding(0,0,0,0);
@@ -156,10 +158,19 @@ public class MessageActivity extends AppCompatActivity {
 
 //            opening the profile page when the username is clicked
 
+
         usernameView.setOnClickListener(view14 -> {
             Intent intent1 =new Intent(MessageActivity.this,ProfileActivity.class);
             intent1.putExtra("user",recipientId);
             intent1.putExtra("username",username);
+            startActivity(intent1);
+        });
+
+        usernameView.setOnClickListener(view14 -> {
+            Intent intent1 =new Intent(MessageActivity.this,ProfileActivity.class);
+            intent1.putExtra("user",recipientId);
+            intent1.putExtra("username",username);
+
             startActivity(intent1);
         });
 

@@ -28,8 +28,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/my_profile_profilePic"
-                    android:src="@drawable/image3"
                     android:scaleType="centerCrop"
+                    android:contentDescription="null"
                     />
 
 

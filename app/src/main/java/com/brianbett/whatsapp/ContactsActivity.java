@@ -1,18 +1,8 @@
 package com.brianbett.whatsapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -20,6 +10,14 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.brianbett.whatsapp.retrofit.Contact;
 import com.brianbett.whatsapp.retrofit.ContactsInterface;
@@ -29,7 +27,6 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ContactsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -55,15 +52,19 @@ public class ContactsActivity extends AppCompatActivity {
             @Override
             public void success(List<Contact> contacts) {
                 contacts.forEach(contact -> {
+                });
+                contacts.forEach(contact -> {
                     //        showing only contacts that are saved on the phone and are in the database
 
                     Contact newContact=null;
                     for(PhoneContact phoneContact:phoneContacts){
+
                         if(phoneContact.getPhoneNumber().equals(contact.getPhoneNumber())){
-                            newContact=new Contact(contact.getPhoneNumber(),contact.getAbout(),contact.getUserId());
+                            newContact=new Contact(contact.getPhoneNumber(),contact.getAbout(),contact.getUserId(),contact.getProfilePic());
                             newContact.setName(phoneContact.getName());
                             myContacts.add(newContact);
                         }
+
                     }
 
                 });

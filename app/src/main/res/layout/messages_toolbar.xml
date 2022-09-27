@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/background_dark"
+    android:background="@color/black"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="HardCodedText"
 
@@ -46,7 +46,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/image3"
+                android:id="@+id/profile_pic"
                 android:scaleType="centerCrop"
                 android:contentDescription="Profile"
 

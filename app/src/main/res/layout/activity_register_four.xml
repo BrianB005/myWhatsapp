@@ -8,6 +8,7 @@
     tools:ignore="HardCodedText"
     android:id="@+id/layout_view"
     android:background="@android:color/background_dark"
+
     >
 
     <LinearLayout

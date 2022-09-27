@@ -6,19 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="HardcodedText"
-    tools:context=".MyStatusActivity">
+    tools:context=".MyStatusActivity"
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-
         android:id="@+id/toolbar"
-        app:layout_editor_absoluteX="0dp"
-        app:layout_editor_absoluteY="0dp"
-        android:layout_marginTop="10dp"
-        />
+
+
+        >
+        <!--below widget is use to create indicator for our stories at top-->
+        <jp.shts.android.storiesprogressview.StoriesProgressView
+            android:id="@+id/stories"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_gravity="top"
+
+            android:paddingEnd="10dp"
+            android:paddingStart="0dp"
+
+            android:translationZ="50dp"/>
+    </androidx.appcompat.widget.Toolbar>
 
 
     <!--below is the image view where we will
@@ -69,45 +79,58 @@
 
     </LinearLayout>
 
-    <!--below widget is use to create indicator for our stories at top-->
-    <jp.shts.android.storiesprogressview.StoriesProgressView
-        android:id="@+id/stories"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_gravity="top"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
 
-        android:translationZ="50dp"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_height="match_parent"
+        android:background="@color/black"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        android:id="@+id/status_loading"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/status_caption"
-            android:textColor="@color/white"
-            android:layout_marginBottom="5dp"
+        <ProgressBar
+            android:layout_width="60dp"
+            android:layout_height="60dp"
 
             />
-
-
-        <TextView
-            android:layout_width="wrap_content"
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Viewers"
+
+
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
             android:textColor="@color/white"
+            android:gravity="center"
             android:textSize="17sp"
             tools:ignore="HardcodedText"
             app:drawableTint="@color/white"
+            android:id="@+id/status_caption"
+            android:paddingVertical="4dp"
+         />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Viewers"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText"
+            app:drawableTint="@color/white"
+            android:id="@+id/viewers"
             app:drawableTopCompat="@drawable/chevron_up" />
-    </LinearLayout>
+
+        </LinearLayout>
+
 
 </merge>
 

@@ -3,6 +3,7 @@ package com.brianbett.whatsapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +18,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brianbett.whatsapp.retrofit.Message;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
    private final ArrayList<Message> messagesArrayList;
-    private final Context myContext;
+    private  Context myContext;
+    LayoutInflater layoutInflater;
 
     View rootView;
     public RecyclerViewAdapter(Context context , ArrayList<Message>messages,View view) {
         this.messagesArrayList=messages;
-        this.myContext=context;
+//        this.myContext=context;
         this.rootView=view;
     }
 
@@ -36,7 +42,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= LayoutInflater.from(myContext);
+         layoutInflater= LayoutInflater.from(parent.getContext());
+         myContext= parent.getContext();
 
 
 
@@ -71,9 +78,80 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
         holder.name.setText(messagesArrayList.get(position).getPhoneNumber());
-        holder.date.setText(messagesArrayList.get(position).getTime());
+        holder.date.setText(ConvertTimestamp.getStatusMoments(myContext,messagesArrayList.get(position).getTime()));
         holder.message.setText(messagesArrayList.get(position).getMessage());
-        holder.imageView.setImageBitmap(messagesArrayList.get(position).getImageSource());
+
+        StorageReference storageReference= FirebaseStorage.getInstance().getReference("images/"+messagesArrayList.get(position).getProfilePic());
+
+
+        Task<Uri> uriTask=storageReference.getDownloadUrl();
+
+        uriTask.addOnSuccessListener(uri1 -> {
+            Glide.with(myContext).load(uri1).into(holder.imageView);
+            holder.imageView.setOnClickListener(view -> {
+                LayoutInflater layoutInflater=LayoutInflater.from(myContext);
+                @SuppressLint("InflateParams") View popUpView=layoutInflater.inflate(R.layout.profile_popup,null);
+                ImageView profilePic=popUpView.findViewById(R.id.profilePicPopUp);
+                TextView profile_name=popUpView.findViewById(R.id.popup_user_name);
+                profile_name.setText(messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
+                Glide.with(myContext).load(uri1).into(profilePic);
+//
+                PopupWindow popupWindow=new PopupWindow(popUpView, 800,800,true);
+                popupWindow.showAsDropDown(view,200,-view.getHeight()-50,Gravity.TOP);
+//              blurring the background when popup is active
+                FrameLayout frameLayout=rootView.findViewById(R.id.messages_container);
+                frameLayout.getForeground().setAlpha(160);
+
+//                removing the modal overlay on popup dismissal
+                popupWindow.setOnDismissListener(() -> frameLayout.getForeground().setAlpha(0));
+//                subscribing to click events on the popup window elements
+                popUpView.findViewById(R.id.pop_up_open_profile).setOnClickListener(view1 -> {
+                    Intent intent=new Intent(myContext,ProfileActivity.class);
+                    intent.putExtra("user",messagesArrayList.get(holder.getAdapterPosition()).getUserId());
+                    intent.putExtra("username",messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    myContext.startActivity(intent);
+                });
+                popUpView.findViewById(R.id.profilePicPopUp).setOnClickListener(view12 -> {
+                    Intent intent=new Intent(myContext,ViewImageActivity.class);
+                    intent.putExtra("user",messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
+                    intent.putExtra("image",uri1.toString());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    myContext.startActivity(intent);
+                });
+                popUpView.findViewById(R.id.popup_message).setOnClickListener(view14 -> {
+                    Intent intent=new Intent(myContext,MessageActivity.class);
+                    intent.putExtra("username",messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
+                    intent.putExtra("userId",messagesArrayList.get(holder.getAdapterPosition()).getUserId());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    myContext.startActivity(intent);
+                });
+                popUpView.findViewById(R.id.popup_call).setOnClickListener(view13 -> {
+                    LayoutInflater layoutInflater1 =LayoutInflater.from(myContext);
+                    @SuppressLint("InflateParams") View popUpView1 = layoutInflater1.inflate(R.layout.profile_popup_call,null);
+                    PopupWindow popupWindow1 =new PopupWindow(popUpView1, WindowManager.LayoutParams.MATCH_PARENT,350,true);
+//                        popupWindow.showAsDropDown(view,0,0,Gravity.START);
+                    popupWindow1.showAsDropDown(view13);
+                });
+                popUpView.findViewById(R.id.popup_video_call).setOnClickListener(view15 -> {
+                    LayoutInflater layoutInflater12 =LayoutInflater.from(myContext);
+                    @SuppressLint("InflateParams") View popUpView12 = layoutInflater12.inflate(R.layout.profile_popup_videocall,null);
+                    PopupWindow popupWindow12 =new PopupWindow(popUpView12, WindowManager.LayoutParams.MATCH_PARENT,350,true);
+                    popupWindow12.showAsDropDown(view15,0,0,Gravity.START);
+                });
+
+            });
+            //        listening to onclick events and opening new activities
+            holder.itemView.setOnClickListener(view -> {
+                Intent intent=new Intent(myContext,MessageActivity.class);
+                intent.putExtra("username",messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
+                intent.putExtra("userId",messagesArrayList.get(holder.getAdapterPosition()).getUserId());
+                intent.putExtra("profilePic",uri1.toString());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                myContext.startActivity(intent);
+            });
+
+        });
 
         holder.imageView.setClipToOutline(true);
 
@@ -82,59 +160,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Intent intent=new Intent(myContext,MessageActivity.class);
             intent.putExtra("username",messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
             intent.putExtra("userId",messagesArrayList.get(holder.getAdapterPosition()).getUserId());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             myContext.startActivity(intent);
         });
 
-//        popup window for when the profile pic is clicked
-        holder.imageView.setOnClickListener(view -> {
-            LayoutInflater layoutInflater=LayoutInflater.from(myContext);
-            @SuppressLint("InflateParams") View popUpView=layoutInflater.inflate(R.layout.profile_popup,null);
-            ImageView profilePic=popUpView.findViewById(R.id.profilePicPopUp);
-            TextView profile_name=popUpView.findViewById(R.id.popup_user_name);
-            profile_name.setText(messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
-            profilePic.setImageBitmap(messagesArrayList.get(holder.getAdapterPosition()).getImageSource());
-//
-            PopupWindow popupWindow=new PopupWindow(popUpView, 800,800,true);
-            popupWindow.showAsDropDown(view,200,-view.getHeight()-50,Gravity.TOP);
-//              blurring the background when popup is active
-            FrameLayout frameLayout=rootView.findViewById(R.id.messages_container);
-            frameLayout.getForeground().setAlpha(160);
 
-//                removing the modal overlay on popup dismissal
-            popupWindow.setOnDismissListener(() -> frameLayout.getForeground().setAlpha(0));
-//                subscribing to click events on the popup window elements
-            popUpView.findViewById(R.id.pop_up_open_profile).setOnClickListener(view1 -> {
-                Intent intent=new Intent(myContext,ProfileActivity.class);
-                intent.putExtra("user",messagesArrayList.get(holder.getAdapterPosition()).getUserId());
-                intent.putExtra("username",messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
-                myContext.startActivity(intent);
-            });
-            popUpView.findViewById(R.id.profilePicPopUp).setOnClickListener(view12 -> {
-                Intent intent=new Intent(myContext,ViewImageActivity.class);
-                intent.putExtra("user",messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
-                myContext.startActivity(intent);
-            });
-            popUpView.findViewById(R.id.popup_message).setOnClickListener(view14 -> {
-                Intent intent=new Intent(myContext,MessageActivity.class);
-                intent.putExtra("username",messagesArrayList.get(holder.getAdapterPosition()).getPhoneNumber());
-                intent.putExtra("userId",messagesArrayList.get(holder.getAdapterPosition()).getUserId());
-                myContext.startActivity(intent);
-            });
-            popUpView.findViewById(R.id.popup_call).setOnClickListener(view13 -> {
-                LayoutInflater layoutInflater1 =LayoutInflater.from(myContext);
-                @SuppressLint("InflateParams") View popUpView1 = layoutInflater1.inflate(R.layout.profile_popup_call,null);
-                PopupWindow popupWindow1 =new PopupWindow(popUpView1, WindowManager.LayoutParams.MATCH_PARENT,350,true);
-//                        popupWindow.showAsDropDown(view,0,0,Gravity.START);
-                popupWindow1.showAsDropDown(view13);
-            });
-            popUpView.findViewById(R.id.popup_video_call).setOnClickListener(view15 -> {
-                LayoutInflater layoutInflater12 =LayoutInflater.from(myContext);
-                @SuppressLint("InflateParams") View popUpView12 = layoutInflater12.inflate(R.layout.profile_popup_videocall,null);
-                PopupWindow popupWindow12 =new PopupWindow(popUpView12, WindowManager.LayoutParams.MATCH_PARENT,350,true);
-                popupWindow12.showAsDropDown(view15,0,0,Gravity.START);
-            });
-
-        });
 
     }
 

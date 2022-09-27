@@ -4,14 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,13 +17,22 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.brianbett.whatsapp.retrofit.ChatMessage;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.brianbett.whatsapp.retrofit.Contact;
-import com.brianbett.whatsapp.retrofit.ImageInterface;
 import com.brianbett.whatsapp.retrofit.Message;
 import com.brianbett.whatsapp.retrofit.MessagesInterface;
 import com.brianbett.whatsapp.retrofit.MyPreferences;
 import com.brianbett.whatsapp.retrofit.RetrofitHandler;
+import com.brianbett.whatsapp.retrofit.User;
+import com.brianbett.whatsapp.retrofit.UserInterface;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.pusher.client.Pusher;
@@ -40,13 +44,10 @@ import com.pusher.client.connection.ConnectionEventListener;
 import com.pusher.client.connection.ConnectionState;
 import com.pusher.client.connection.ConnectionStateChange;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Objects;
 
 public class MessagesFragment extends Fragment {
     RecyclerView recyclerView;
@@ -63,7 +64,6 @@ public class MessagesFragment extends Fragment {
 
 
 
-    MyViewModel myViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,15 +76,20 @@ public class MessagesFragment extends Fragment {
         frameLayout.getForeground().setAlpha(0);
         recyclerView=rootView.findViewById(R.id.recyclerView);
         //        setting up the recyclerview
-        recyclerViewAdapter=new RecyclerViewAdapter(getContext(),messages,rootView);
+        assert getActivity()!=null;
+        recyclerViewAdapter=new RecyclerViewAdapter(getActivity().getApplicationContext(),messages,rootView);
 
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        ensures that the action bar is visible
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+
         setHasOptionsMenu(true);
 
+
+        assert getActivity()!=null;
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black)));
         //    retrieving contacts from shared preferences
 
+        assert getContext()!=null;
         SharedPreferences preferences= getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String contacts=preferences.getString("contacts",null);
         Type type= new TypeToken<ArrayList<Contact>>(){}.getType();
@@ -98,12 +103,7 @@ public class MessagesFragment extends Fragment {
 
 //        opening contacts page when start chat btn is clicked
         View openContacts=rootView.findViewById(R.id.open_contacts);
-        openContacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(),ContactsActivity.class));
-            }
-        });
+        openContacts.setOnClickListener(view -> startActivity(new Intent(getActivity(),ContactsActivity.class)));
 
 
 
@@ -151,6 +151,26 @@ public class MessagesFragment extends Fragment {
 
         });
 
+
+        RetrofitHandler.getCurrentUser(getContext(), new UserInterface() {
+            @Override
+            public void success(User user) {
+
+                StorageReference storageReference= FirebaseStorage.getInstance().getReference("images/"+user.getProfilePic());
+
+                Task<Uri> uriTask=storageReference.getDownloadUrl();
+
+                uriTask.addOnSuccessListener(uri1 -> {
+                    assert getActivity()!=null;
+                    MyPreferences.saveItemToSP(getActivity().getApplicationContext(), "profilePic", uri1.toString() );
+                });
+            }
+
+            @Override
+            public void failure(Throwable throwable) {
+
+            }
+        });
 
         return rootView;
 
@@ -210,24 +230,16 @@ public class MessagesFragment extends Fragment {
                     //        getting names of those saved in the phone nook
                     assert  allContacts!=null;
 
-
-
-
-                    RetrofitHandler.fetchImage(message.getRecipient().getProfilePic(), new ImageInterface() {
-                        @Override
-                        public void success(Bitmap bitmap) {
-                            message.getRecipient().setImageBitmap(bitmap);
-
-//                            Log.d("bitmap",bitmap.toString());
-
-                        }
-                        @Override
-                        public void failure(Throwable throwable) {
-
-                        }
-
-                    });
-                    Message message1=new Message(message.getMessage(),message.getRecipient().getPhoneNumber(),message.getRecipient().getUserId(), message.getTime(),message.getImageSource());
+//                    StorageReference storageReference= FirebaseStorage.getInstance().getReference("images/"+messagesArrayList.get(position).getImageSource());
+//
+//
+//                    Task<Uri> uriTask=storageReference.getDownloadUrl();
+//
+//                    uriTask.addOnSuccessListener(uri1 -> {
+//                        Glide.with(myContext).load(uri1).into(holder.imageView);
+//
+//                    });
+                    Message message1=new Message(message.getMessage(),message.getRecipient().getPhoneNumber(),message.getRecipient().getUserId(), message.getTime(),message.getRecipient().getProfilePic());
                     messages.add(message1);
                     recyclerViewAdapter.notifyDataSetChanged();
                 }
